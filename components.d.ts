@@ -4,14 +4,12 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElDescriptions: typeof import('element-plus/es')['ElDescriptions']
     ElDescriptionsItem: typeof import('element-plus/es')['ElDescriptionsItem']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElTag: typeof import('element-plus/es')['ElTag']
-    Loading: typeof import('element-plus/es')['ElLoadingDirective']
-    TodolistCom: typeof import('./components/TodolistCom/index.vue')['default']
-    TodoListItem: typeof import('./components/TodolistCom/modules/TodoListItem.vue')['default']
   }
 }
 

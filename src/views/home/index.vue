@@ -3,10 +3,11 @@
  * @Date: 2022-02-08 09:20:28
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-02-15 18:45:00
+ * @LastEditTime: 2022-03-11 18:42:20
 -->
 <template>
     <div class="home-container">
+        <!-- 用户信息 -->
         <div class="user-info">
             <div class="head">
                 北京时间：{{ currentTime }}
@@ -25,7 +26,8 @@
                 </el-descriptions-item>
             </el-descriptions>
         </div>
-        <div class="user-todo" v-if="!loading">
+        <!-- 待办事件 -->
+        <div class="user-todo">
             <todolist-com :current-time="currentTime"></todolist-com>
         </div>
     </div>
@@ -64,7 +66,8 @@ onMounted(async () => {
     margin-bottom: 15px;
 }
 .user-info {
-    width: 500px;
+    box-sizing: border-box;
+    width: 800px;
     margin: 20px 0 0;
     padding: 15px;
     height: 100%;

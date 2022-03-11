@@ -3,10 +3,11 @@
  * @Date: 2022-02-14 17:39:31
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-02-15 18:08:12
+ * @LastEditTime: 2022-03-11 17:46:37
  */
-import type { GetUserInfoModel } from './model/userModel';
-import axios from '@/utils/axios';
+import type { GetUserInfoModel, TodoListItem } from './model/userModel';
+import { local } from '@/plugins/localforage';
+// import axios from '@/utils/axios';
 
 // export const getUserInfo = ():Promise<GetUserInfoModel> => axios({ url: '/user/getUserInfo', method: 'get'})
 
@@ -19,6 +20,15 @@ export const getUserInfo = (): Promise<GetUserInfoModel> => {
         place: 'GuangZhou',
         tag: ['Javascript', 'Vue', 'React'],
       };
+      resolve(payload);
+    }, 1000);
+  });
+};
+
+export const getTodoList = (): Promise<TodoListItem[]> => {
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      const payload: TodoListItem[] | any = await local.getItem('todoListData');
       resolve(payload);
     }, 1000);
   });

@@ -3,18 +3,27 @@
  * @Date: 2022-02-07 10:37:58
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-02-14 17:19:26
+ * @LastEditTime: 2022-03-11 17:59:20
  */
-import { createApp } from "vue";
-import App from "./App.vue";
-import { router } from "./router/index";
-import store from "./store/index";
-import "normalize.css"
+import { createApp } from 'vue';
+import App from './App.vue';
+import { router } from './router/index';
+import store from './store/index';
+import localforage from 'localforage';
+import { createDataStore } from '@/plugins/localforage';
+import 'normalize.css';
 
-const app = createApp(App);
+async function init() {
 
-app.config.globalProperties.customerParams = "luoshuai";
+  await createDataStore({
+    driver: localforage.LOCALSTORAGE,
+    name: 'Lewis',
+  });
 
-app.use(store);
-app.use(router);
-app.mount("#app");
+  const app = createApp(App);
+  app.use(store);
+  app.use(router);
+  app.mount('#app');
+}
+
+init();
