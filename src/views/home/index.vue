@@ -3,15 +3,13 @@
  * @Date: 2022-02-08 09:20:28
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-11 18:42:20
+ * @LastEditTime: 2022-03-13 21:19:24
 -->
 <template>
     <div class="home-container">
         <!-- 用户信息 -->
         <div class="user-info">
-            <div class="head">
-                北京时间：{{ currentTime }}
-            </div>
+            <div class="head">北京时间：{{ currentTime }}</div>
             <el-descriptions title="User Info" v-loading="loading">
                 <el-descriptions-item label="Username">{{ userInfo.username }}</el-descriptions-item>
                 <el-descriptions-item label="Telephone">{{ userInfo.phone }}</el-descriptions-item>
@@ -37,17 +35,17 @@ import { getUserInfo } from "@/api/user";
 import dayjs from "dayjs"
 import type { GetUserInfoModel } from "@/api/model/userModel";
 
-let userInfo = ref<GetUserInfoModel>({ username: '', phone: '', place: '', tag: [] });
-let loading = ref<boolean>(true)
+let userInfo = ref<GetUserInfoModel>({ username: "", phone: "", place: "", tag: [] });
+let loading = ref(true)
 let currentTime = ref<string>(dayjs(new Date().getTime()).format("YYYY-MM-DD HH:mm:ss"))
 
-function startTime(time:number){
+function startTime(time: number) {
     currentTime.value = dayjs(time).format("YYYY-MM-DD HH:mm:ss")
-    setTimeout(()=>{
+    setTimeout(() => {
         time += 1000
         currentTime.value = dayjs(time).format("YYYY-MM-DD HH:mm:ss")
         startTime(time)
-    },1000)
+    }, 1000)
 }
 startTime(new Date().getTime())
 
@@ -62,7 +60,7 @@ onMounted(async () => {
     padding: 20px;
 }
 
-.head{
+.head {
     margin-bottom: 15px;
 }
 .user-info {

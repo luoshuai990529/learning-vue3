@@ -3,7 +3,7 @@
  * @Date: 2022-02-14 17:24:35
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-11 18:41:45
+ * @LastEditTime: 2022-03-13 21:19:44
 -->
 <template>
     <div class="todolist-container">
@@ -19,12 +19,12 @@
 </template>
 
 <script lang="ts" setup>
-import TodoListItem from './modules/TodoListItem.vue'
-import { getTodoList } from "@/api/user";
+import TodoListItem from "./modules/TodoListItem.vue"
+import { getTodoList } from "@/api/user"
 import { TodoListItem as TodoListItemType } from "@/api/model/userModel"
 
 let todoList = ref<TodoListItemType[]>([]);
-let loading = ref<Boolean>(true)
+let loading = ref(true)
 
 onMounted(async () => {
     todoList.value = await getTodoList();
@@ -39,6 +39,8 @@ onMounted(async () => {
     .operator {
         // border: 1px solid black;
         margin: 0 0 20px;
+    }
+    .todolist-content {
     }
 }
 </style>
