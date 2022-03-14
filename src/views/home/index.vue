@@ -3,30 +3,35 @@
  * @Date: 2022-02-08 09:20:28
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-13 21:19:24
+ * @LastEditTime: 2022-03-14 14:17:52
 -->
 <template>
     <div class="home-container">
-        <!-- 用户信息 -->
-        <div class="user-info">
-            <div class="head">北京时间：{{ currentTime }}</div>
-            <el-descriptions title="User Info" v-loading="loading">
-                <el-descriptions-item label="Username">{{ userInfo.username }}</el-descriptions-item>
-                <el-descriptions-item label="Telephone">{{ userInfo.phone }}</el-descriptions-item>
-                <el-descriptions-item label="Place">{{ userInfo.place }}</el-descriptions-item>
-                <el-descriptions-item label="Remarks">
-                    <el-tag
-                        class="tag-wrap"
-                        size="small"
-                        v-for="(item, index) of userInfo.tag"
-                        :key="index"
-                    >{{ item }}</el-tag>
-                </el-descriptions-item>
-            </el-descriptions>
+        <div class="home-left">
+            <!-- 用户信息 -->
+            <div class="user-info">
+                <div class="user-info-head">北京时间：{{ currentTime }}</div>
+                <el-descriptions title="User Info" v-loading="loading">
+                    <el-descriptions-item label="Username">{{ userInfo.username }}</el-descriptions-item>
+                    <el-descriptions-item label="Telephone">{{ userInfo.phone }}</el-descriptions-item>
+                    <el-descriptions-item label="Place">{{ userInfo.place }}</el-descriptions-item>
+                    <el-descriptions-item label="Remarks">
+                        <el-tag
+                            class="tag-wrap"
+                            size="small"
+                            v-for="(item, index) of userInfo.tag"
+                            :key="index"
+                        >{{ item }}</el-tag>
+                    </el-descriptions-item>
+                </el-descriptions>
+            </div>
+            <!-- 待办事件 -->
+            <div class="user-todo">
+                <todolist-com :current-time="currentTime"></todolist-com>
+            </div>
         </div>
-        <!-- 待办事件 -->
-        <div class="user-todo">
-            <todolist-com :current-time="currentTime"></todolist-com>
+        <div class="home-right">
+            <el-card class="box-card">完成列表</el-card>
         </div>
     </div>
 </template>
@@ -57,22 +62,30 @@ onMounted(async () => {
 </script>
 <style lang="less" scoped>
 .home-container {
-    padding: 20px;
+    display: flex;
+    padding: 40px;
+}
+.home-left {
+    flex: 1;
+}
+.home-right {
+    flex: 1;
+    min-width: 400px;
+    margin-left: 20px;
 }
 
-.head {
-    margin-bottom: 15px;
-}
 .user-info {
     box-sizing: border-box;
-    width: 800px;
-    margin: 20px 0 0;
+    min-width: 700px;
     padding: 15px;
     height: 100%;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
-.tag-wrap {
-    margin-left: 10px;
+    .user-info-head {
+        margin-bottom: 15px;
+    }
+    .tag-wrap {
+        margin-left: 10px;
+    }
 }
 
 .user-todo {

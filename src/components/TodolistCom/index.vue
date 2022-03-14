@@ -3,7 +3,7 @@
  * @Date: 2022-02-14 17:24:35
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-13 21:19:44
+ * @LastEditTime: 2022-03-14 19:09:47
 -->
 <template>
     <div class="todolist-container">
@@ -21,7 +21,11 @@
 <script lang="ts" setup>
 import TodoListItem from "./modules/TodoListItem.vue"
 import { getTodoList } from "@/api/user"
-import { TodoListItem as TodoListItemType } from "@/api/model/userModel"
+import { TodoListItemType } from "@/api/model/userModel"
+const { currentTime } = defineProps<{
+    currentTime: string
+}>()
+console.log("currentTime---", currentTime);
 
 let todoList = ref<TodoListItemType[]>([]);
 let loading = ref(true)
@@ -35,7 +39,7 @@ onMounted(async () => {
 
 <style lang="less" scoped>
 .todolist-container {
-    width: 800px;
+    width: 100%;
     .operator {
         // border: 1px solid black;
         margin: 0 0 20px;
