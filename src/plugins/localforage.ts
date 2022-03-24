@@ -3,7 +3,7 @@
  * @Date: 2022-03-11 17:15:51
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-14 17:44:40
+ * @LastEditTime: 2022-03-22 14:33:44
  */
 import localforage from 'localforage';
 interface LocalForage {
@@ -60,6 +60,45 @@ const createDataStore = (config: LocalForageOptions) => {
                             id: 1,
                             tag: 1001,
                             desc: '阅读数据《Vue.js设计与实现》',
+                            target: '读完第一章节，并且有学习笔记产出',
+                            note: '',
+                            status: 0,
+                            startTime: '2022-03-11 15:00:00',
+                            endTime: '2022-03-11 16:00:00',
+                            editTime: '2022-03-11 15:00:00',
+                        },
+                    ],
+                },
+                {
+                    tagId: 1002,
+                    label: '运动',
+                    list: [
+                        {
+                            id: 1,
+                            tag: 1002,
+                            desc: '跑步🏃🏿‍♂️5km',
+                            target: '',
+                            note: '',
+                            status: 0,
+                            startTime: '2022-03-11 15:00:00',
+                            endTime: '2022-03-11 16:00:00',
+                            editTime: '2022-03-11 15:00:00',
+                        },
+                        {
+                            id: 2,
+                            tag: 1002,
+                            desc: '深蹲12 * 6组',
+                            target: '',
+                            note: '',
+                            status: 0,
+                            startTime: '2022-03-11 15:00:00',
+                            endTime: '2022-03-11 16:00:00',
+                            editTime: '2022-03-11 15:00:00',
+                        },
+                        {
+                            id: 3,
+                            tag: 1002,
+                            desc: '上斜卧推🏋🏿‍♂️12 * 6组',
                             target: '',
                             note: '',
                             status: 0,

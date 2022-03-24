@@ -3,7 +3,7 @@
  * @Date: 2022-02-08 09:20:28
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-14 14:17:52
+ * @LastEditTime: 2022-03-24 16:04:56
 -->
 <template>
     <div class="home-container">
@@ -11,9 +11,9 @@
             <!-- 用户信息 -->
             <div class="user-info">
                 <div class="user-info-head">北京时间：{{ currentTime }}</div>
-                <el-descriptions title="User Info" v-loading="loading">
+                <el-descriptions title="Information Of The Author" v-loading="loading">
                     <el-descriptions-item label="Username">{{ userInfo.username }}</el-descriptions-item>
-                    <el-descriptions-item label="Telephone">{{ userInfo.phone }}</el-descriptions-item>
+                    <el-descriptions-item label="Wechat">{{ userInfo.wechat }}</el-descriptions-item>
                     <el-descriptions-item label="Place">{{ userInfo.place }}</el-descriptions-item>
                     <el-descriptions-item label="Remarks">
                         <el-tag
@@ -27,7 +27,7 @@
             </div>
             <!-- 待办事件 -->
             <div class="user-todo">
-                <todolist-com :current-time="currentTime"></todolist-com>
+                <todo-list-com :current-time="currentTime"></todo-list-com>
             </div>
         </div>
         <div class="home-right">
@@ -36,11 +36,12 @@
     </div>
 </template>
 <script lang="ts" setup>
+import TodoListCom from './components/TodolistCom/index.vue'
 import { getUserInfo } from "@/api/user";
 import dayjs from "dayjs"
 import type { GetUserInfoModel } from "@/api/model/userModel";
 
-let userInfo = ref<GetUserInfoModel>({ username: "", phone: "", place: "", tag: [] });
+let userInfo = ref<GetUserInfoModel>({ username: "", wechat: "", place: "", tag: [] });
 let loading = ref(true)
 let currentTime = ref<string>(dayjs(new Date().getTime()).format("YYYY-MM-DD HH:mm:ss"))
 
@@ -55,6 +56,8 @@ function startTime(time: number) {
 startTime(new Date().getTime())
 
 onMounted(async () => {
+    console.log("onMounted getUserInfo");
+
     userInfo.value = await getUserInfo();
     loading.value = false
 });
@@ -78,7 +81,6 @@ onMounted(async () => {
     box-sizing: border-box;
     min-width: 700px;
     padding: 15px;
-    height: 100%;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .user-info-head {
         margin-bottom: 15px;

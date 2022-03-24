@@ -3,11 +3,11 @@
  * @Date: 2022-02-15 17:13:29
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-14 19:02:34
+ * @LastEditTime: 2022-03-24 14:23:16
  */
 export interface GetUserInfoModel {
     username: string;
-    phone: string;
+    wechat: string;
     place: string;
     tag: string[];
 }

@@ -3,19 +3,33 @@
  * @Date: 2022-02-14 17:24:35
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-22 15:02:43
+ * @LastEditTime: 2022-03-24 16:22:50
 -->
 <template>
     <div class="todolist-item-container">
         <div class="todolist-tag-wrap">
-            <el-checkbox
-                v-model="checkAll"
-                :indeterminate="isIndeterminate"
-                @change="handleCheckAllChange"
-            >全选</el-checkbox>
+            <div class="checkbox-operator">
+                <el-checkbox
+                    v-model="checkAll"
+                    :indeterminate="isIndeterminate"
+                    @change="handleCheckAllChange"
+                >全选</el-checkbox>
+                <el-button
+                    :disabled="checkedTodos.length === 0"
+                    class="complete-btn"
+                    type="success"
+                    size="small"
+                >完成选中</el-button>
+                <el-button
+                    :disabled="checkedTodos.length === 0"
+                    class="complete-btn"
+                    type="danger"
+                    size="small"
+                >删除选中</el-button>
+            </div>
             <div class="tag-group">
                 {{ data.label }}
-                <span class="switch-icon">+</span>
+                <span class="switch-icon" :class="{'unfold-icon': isUnfold}" @click="unfoldHandler">+</span>
             </div>
         </div>
         <el-checkbox-group v-model="checkedTodos" @change="handleCheckedTodosChange">
@@ -44,20 +58,26 @@ import { TodoListItemType } from '@/api/model/userModel'
 const { data } = defineProps<{
     data: TodoListItemType
 }>()
-const checkedList = data.list.map(task => task.id)
+
+const checkedList = data.list.map(task => task.id) // 该标签下的所有待办项id数组
 const checkAll = ref(false)
 const isIndeterminate = ref(false)
-const checkedTodos = ref<any[]>([])
+const checkedTodos = ref<number[]>([]) // 选中的待办项id数组
 
 const handleCheckAllChange = (val: boolean) => {
     checkedTodos.value = val ? checkedList : []
     isIndeterminate.value = false
 }
 
-const handleCheckedTodosChange = (value: any[]) => {
+const handleCheckedTodosChange = (value: number[]) => {
     const checkedCount = value.length
     checkAll.value = checkedCount === checkedList.length
     isIndeterminate.value = checkedCount > 0 && checkedCount < checkedList.length
+}
+
+const isUnfold = ref(true) // 展开状态 默认-true
+const unfoldHandler = () => {
+    isUnfold.value = !isUnfold.value
 }
 </script>
 
@@ -76,8 +96,23 @@ const handleCheckedTodosChange = (value: any[]) => {
     line-height: 38px;
     padding: 0 20px;
     border-bottom: 1px solid #dcdfe6;
+    .checkbox-operator {
+        display: flex;
+        align-items: center;
+        .complete-btn {
+            margin-left: 10px;
+        }
+    }
     .tag-group {
+        color: rgb(117, 117, 117);
         font-size: 14px;
+        .switch-icon{
+            display: inline-block;
+            width: 50px;
+            height: 100%;
+            background: #bfaaaa;
+            cursor: pointer;
+        }
     }
 }
 

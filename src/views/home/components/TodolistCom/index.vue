@@ -3,22 +3,21 @@
  * @Date: 2022-02-14 17:24:35
  * @Author: luoshuai
  * @LastEditors: luoshuai
- * @LastEditTime: 2022-03-22 11:43:55
+ * @LastEditTime: 2022-03-24 16:13:00
 -->
 <template>
     <div class="todolist-container">
         <el-card class="box-card" v-loading="loading">
             <div class="operator">操作列</div>
             <div class="todolist-content">
-                
-                    <todo-list-item v-for="(item) in todoList" :key="item.tagId" :data="item"></todo-list-item>
+                <todo-list-item v-for="(item) in todoList" :key="item.tagId" :data="item"></todo-list-item>
             </div>
         </el-card>
     </div>
 </template>
 
 <script lang="ts" setup>
-import TodoListItem from "./modules/TodoListItem.vue"
+import TodoListItem from "./TodoListItem.vue"
 import { getTodoList } from "@/api/user"
 import { TodoListItemType } from "@/api/model/userModel"
 
